@@ -166,7 +166,7 @@ var startQuiz = function() {
     mainSection.appendChild(responseText);
 
     // create questions elements and append to questionSpaceEl
-    var question = document.createElement("h3");
+    var question = document.createElement("p");
     question.className = "question";
     question.setAttribute("id", "question");
     questionSpaceEl.appendChild(question);

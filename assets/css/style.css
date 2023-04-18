@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* ignore padding in overall width */
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    padding: 50px 0;
+}
+
+header h1 {
+    text-align: center;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+#welcome-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#welcome-prompt h2 {
+    text-align: center;
+}
+
+#welcome-prompt p {
+    text-align: center;
+    padding: 20px 30px;
+}
+
+#welcome-prompt button {
+    /* outline: none;
+    border: none; */
+    margin-top: 25px;
+    background-color: greenyellow;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    padding-bottom: 20px; 
+}

@@ -97,6 +97,17 @@ var endQuiz = function() {
     answerValidation.remove();
 
     console.log("The quiz has ended");
+     
+    if (secondsRemaining > 0) {
+        var score = secondsRemaining;
+        secondsRemaining = 0;
+        timerDisplay.textContent = "Score: " + score;
+        console.log(score);
+    }
+    else {
+        timerDisplay.textContent = "Time's Up!"
+    }
+    
 ;}
 
 var displayQuestion = function() {
@@ -142,8 +153,9 @@ var startTimer = function() {
         timerDisplay.textContent = "Time Remaining: " + secondsRemaining + " seconds";
         secondsRemaining--;
         if (secondsRemaining <= 0) {
+            secondsRemaining = 0;
             clearInterval(timer);
-            timerDisplay.textContent = "Time's Up!"
+            debugger;
             endQuiz();
         }
     }, 1000); 

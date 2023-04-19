@@ -89,6 +89,24 @@ var questionsArr = [
     }
 ];
 
+var saveScore = function(score) {
+    var scoreDiv = document.createElement("div");
+    scoreDiv.className = "question-div";
+    
+    var finalMessage = document.createElement("p");
+    finalMessage.className = "";
+    finalMessage.textContent = "Congrats! You have completed the challenge!";
+
+    var scoreMessage = document.createElement("p");
+    scoreMessage.className = "";
+    scoreMessage.textContent = "Final Score: " + score;
+
+    scoreDiv.appendChild(finalMessage);
+    scoreDiv.appendChild(scoreMessage);
+
+    mainSection.appendChild(scoreDiv);
+};
+
 var endQuiz = function() {
     var questionDiv = document.getElementById("question-div");
     var answerValidation = document.getElementById("answer-validation");
@@ -101,8 +119,8 @@ var endQuiz = function() {
     if (secondsRemaining > 0) {
         var score = secondsRemaining;
         secondsRemaining = 0;
-        timerDisplay.textContent = "Score: " + score;
         console.log(score);
+        saveScore(score);
     }
     else {
         timerDisplay.textContent = "Time's Up!"
@@ -155,7 +173,6 @@ var startTimer = function() {
         if (secondsRemaining <= 0) {
             secondsRemaining = 0;
             clearInterval(timer);
-            debugger;
             endQuiz();
         }
     }, 1000); 

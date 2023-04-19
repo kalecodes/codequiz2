@@ -4,6 +4,7 @@ var timerDisplay = document.getElementById("timer");
 var mainSection = document.getElementById("main-section");
 var secondsRemaining = 60;
 var currentQuestion = 0;
+var highscores = [];
 
 
 var questionsArr = [
@@ -89,22 +90,61 @@ var questionsArr = [
     }
 ];
 
+
+
 var saveScore = function(score) {
-    var scoreDiv = document.createElement("div");
-    scoreDiv.className = "question-div";
+    var saveScoreDivEl = document.createElement("div");
+    saveScoreDivEl.className = "question-div";
     
-    var finalMessage = document.createElement("p");
-    finalMessage.className = "";
-    finalMessage.textContent = "Congrats! You have completed the challenge!";
+    var savePromptEl = document.createElement("p");
+    savePromptEl.textContent = "Would you like to save you score to the leaderboard?";
 
-    var scoreMessage = document.createElement("p");
-    scoreMessage.className = "";
-    scoreMessage.textContent = "Final Score: " + score;
+    var nameInputEl = document.createElement("input");
+    nameInputEl.setAttribute("type", "text");
 
-    scoreDiv.appendChild(finalMessage);
-    scoreDiv.appendChild(scoreMessage);
+    var saveButtonEl = document.createElement("button");
+    saveButtonEl.className = "";
+    saveButtonEl.setAttribute("id", "save-button");
+    saveButtonEl.textContent = "Save";
 
-    mainSection.appendChild(scoreDiv);
+    saveScoreDivEl.appendChild(savePromptEl);
+    saveScoreDivEl.appendChild(nameInputEl);
+    saveScoreDivEl.appendChild(saveButtonEl);
+
+    mainSection.appendChild(saveScoreDivEl);
+
+    saveButtonEl.addEventListener("click", function() {
+        var name = nameInputEl.value;
+        
+        highscores.push({
+            name: name,
+            score: score
+        });
+
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+        location.href = "./highscores.html";
+    })
+};
+
+var displayScore = function(score) {
+    timerDisplay.remove();
+
+    var scoreDivEl = document.createElement("div");
+    scoreDivEl.className = "question-div";
+    
+    var finalMessageEl = document.createElement("p");
+    finalMessageEl.className = "";
+    finalMessageEl.textContent = "Congrats! You have completed the challenge!";
+
+    var scoreMessageEl = document.createElement("p");
+    scoreMessageEl.className = "";
+    scoreMessageEl.textContent = "Final Score: " + score;
+
+    scoreDivEl.appendChild(finalMessageEl);
+    scoreDivEl.appendChild(scoreMessageEl);
+
+    mainSection.appendChild(scoreDivEl);
+    saveScore(score);
 };
 
 var endQuiz = function() {
@@ -120,7 +160,7 @@ var endQuiz = function() {
         var score = secondsRemaining;
         secondsRemaining = 0;
         console.log(score);
-        saveScore(score);
+        displayScore(score);
     }
     else {
         timerDisplay.textContent = "Time's Up!"
@@ -157,7 +197,6 @@ var validateAnswer = function(event) {
 
     if (currentQuestion < 9) {
         currentQuestion++;
-        console.log(currentQuestion);
         displayQuestion();
     }
     else {
@@ -225,4 +264,15 @@ var startQuiz = function() {
     displayQuestion();
 };
 
+var loadScores = function() {
+    highscores = localStorage.getItem("highscores");
+
+    if (!highscores) {
+        return false;
+    }
+
+    highscores = JSON.parse(highscores);
+};
+
+loadScores();
 startButton.addEventListener("click", startQuiz);

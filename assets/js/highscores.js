@@ -12,6 +12,7 @@ var loadScores = function() {
 
     for (var i = 0; i < highscores.length; i++) {
         var scoreEl = document.createElement("li");
+        scoreEl.className = "score";
         scoreEl.textContent = highscores[i].name + " : " + highscores[i].score;
 
         scoresList.appendChild(scoreEl);

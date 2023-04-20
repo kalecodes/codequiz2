@@ -100,10 +100,11 @@ var saveScore = function(score) {
     savePromptEl.textContent = "Would you like to save you score to the leaderboard?";
 
     var nameInputEl = document.createElement("input");
+    nameInputEl.setAttribute("id", "name-input");
+    nameInputEl.setAttribute("placeholder", "Your Name");
     nameInputEl.setAttribute("type", "text");
 
     var saveButtonEl = document.createElement("button");
-    saveButtonEl.className = "";
     saveButtonEl.setAttribute("id", "save-button");
     saveButtonEl.textContent = "Save";
 
@@ -133,11 +134,11 @@ var displayScore = function(score) {
     scoreDivEl.className = "question-div";
     
     var finalMessageEl = document.createElement("p");
-    finalMessageEl.className = "";
+    finalMessageEl.setAttribute("id", "congrats");
     finalMessageEl.textContent = "Congrats! You have completed the challenge!";
 
     var scoreMessageEl = document.createElement("p");
-    scoreMessageEl.className = "";
+    scoreMessageEl.setAttribute("id", "score-message");
     scoreMessageEl.textContent = "Final Score: " + score;
 
     scoreDivEl.appendChild(finalMessageEl);
@@ -266,12 +267,13 @@ var startQuiz = function() {
 
 var loadScores = function() {
     highscores = localStorage.getItem("highscores");
+    highscores = JSON.parse(highscores);
 
     if (!highscores) {
-        return false;
+        highscores = [];
     }
-
-    highscores = JSON.parse(highscores);
+    
+    console.log(highscores);
 };
 
 loadScores();

@@ -115,8 +115,11 @@ var saveScore = function(score) {
     mainSection.appendChild(saveScoreDivEl);
 
     saveButtonEl.addEventListener("click", function() {
+        // remove last item in array (lowest score)
+        highscores.pop();
+
         var name = nameInputEl.value;
-        
+
         highscores.push({
             name: name,
             score: score
@@ -145,7 +148,23 @@ var displayScore = function(score) {
     scoreDivEl.appendChild(scoreMessageEl);
 
     mainSection.appendChild(scoreDivEl);
-    saveScore(score);
+
+    if (score > highscores[4].score) {
+        console.log(highscores);
+        saveScore(score);
+    }
+    else {
+        var saveScoreDivEl = document.createElement("div");
+        saveScoreDivEl.className = "question-div";
+        
+        var savePromptEl = document.createElement("p");
+        savePromptEl.textContent = "Sorry, your score was not high enough to make it on the leaderboard. Try again!";
+
+        saveScoreDivEl.appendChild(savePromptEl);
+        mainSection.appendChild(saveScoreDivEl);
+    }
+
+    
 };
 
 var endQuiz = function() {
@@ -268,6 +287,10 @@ var startQuiz = function() {
 var loadScores = function() {
     highscores = localStorage.getItem("highscores");
     highscores = JSON.parse(highscores);
+
+    highscores.sort(function(a,b) {
+        return parseInt(b.score) - parseInt(a.score);
+    })
 
     if (!highscores) {
         highscores = [];

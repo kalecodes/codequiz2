@@ -116,7 +116,9 @@ var saveScore = function(score) {
 
     saveButtonEl.addEventListener("click", function() {
         // remove last item in array (lowest score)
-        highscores.pop();
+        if (highscores.length >= 5) {
+            highscores.pop();
+        }
 
         var name = nameInputEl.value;
 
@@ -148,8 +150,10 @@ var displayScore = function(score) {
     scoreDivEl.appendChild(scoreMessageEl);
 
     mainSection.appendChild(scoreDivEl);
-
-    if (score > highscores[4].score) {
+    if (highscores.length < 5) {
+        saveScore(score);
+    }
+    else if (score > highscores[4].score) {
         console.log(highscores);
         saveScore(score);
     }
@@ -288,12 +292,13 @@ var loadScores = function() {
     highscores = localStorage.getItem("highscores");
     highscores = JSON.parse(highscores);
 
-    highscores.sort(function(a,b) {
-        return parseInt(b.score) - parseInt(a.score);
-    })
-
     if (!highscores) {
         highscores = [];
+    }
+    else {
+        highscores.sort(function(a,b) {
+            return parseInt(b.score) - parseInt(a.score);
+        })
     }
     
     console.log(highscores);

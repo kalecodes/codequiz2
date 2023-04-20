@@ -17,6 +17,7 @@ header {
 
 header h1 {
     text-align: center;
+    font-size: 40px;
 }
 
 header nav {
@@ -28,7 +29,7 @@ header nav {
 .link-button {
     text-decoration: none;
     font-size: 20px;
-    padding: 10px;
+    padding: 15px;
     background-color: lightslategray;
     border-radius: 5px;
 }
@@ -42,7 +43,8 @@ header nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    max-width: 80%;
+    margin: 10px auto 0px auto;
 }
 
 #welcome-prompt h2 {
@@ -68,6 +70,10 @@ header nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.question-div p {
+    text-align: center;
 }
 
 .question {
@@ -97,12 +103,13 @@ header nav {
 
 footer {
     width: 100%;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;   
-    padding-bottom: 20px; 
+    padding: 10px 10px 20px 10px;
+    background-color: white;
 }
 
 #scores-div {
@@ -140,4 +147,51 @@ footer {
     text-align: center;
     padding: 10px 5px;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 700px) {
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav p {
+        margin-top: 10px;
+    }
+
+    #welcome-prompt {
+        max-width: 98%;
+    }
+
+    .question {
+        font-size: 20px;
+    }
+
+    #answer-validation {
+        bottom: 100px;
+    }
+
+    #congrats {
+        font-size: 20px;
+    }
+
+    #score-message {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-height: 760px) {
+    #answer-validation {
+        display: none;
+    }
+    
+    header {
+        padding-bottom: 10px;
+    }
+
+    #question {
+        margin-bottom: 10px;
+    }
 }

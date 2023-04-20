@@ -9,6 +9,9 @@ var loadScores = function() {
 
     highscores = JSON.parse(highscores);
 
+    highscores.sort(function(a,b) {
+        return parseInt(b.score) - parseInt(a.score);
+    })
 
     for (var i = 0; i < highscores.length; i++) {
         var scoreEl = document.createElement("li");
